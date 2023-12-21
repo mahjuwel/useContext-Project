@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Users from './components/Users';
+import NewUser from './components/NewUser';
+import { UsersContext } from './context/UsersContext';
 
-function App() {
+const App = () => {
+  const [users, setUsers]=useState([
+    {id: 1, username: "hasan"},
+    {id: 2, username: "juwel"}
+  ]);
+  
+  // const handleAddNewUser = (newUser) =>{
+  //   setUsers(prevUsers => [...prevUsers, newUser]);
+  // }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <UsersContext.Provider value={{users, setUsers}}>
+      <NewUser />
+      <Users />
+    </UsersContext.Provider>
+  )
 }
 
-export default App;
+export default App
